@@ -33,6 +33,16 @@ chat ask: 'How much is the fish?'.
 chat complete.
 ```
 
+## Multimodal chat
+
+| chat image |
+image := CB.Image filename: 'Lighthouse.jpg'.
+chat := CB.Chat modelContext: api defaultVisionContext.
+chat prompt: 'You are an assistant that answers questions regarding images'.
+chat ask: 'Please describe what you see in this image' attachment: image.
+chat complete.
+chat
+
 ## Compute embeddings
 
 ```
