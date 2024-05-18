@@ -18,10 +18,19 @@ Google Vertex
 
 ```
 api := CB.GoogleVertexAIInterface 
-	apiKey: 'ya12.................'
+	apiKey: 'ya12.........'
 	project: 'myproject'
 	location: 'us-central1'.
 ```
+
+AWS Bedrock
+```
+api := AWSBedrockInterface region: 'us-east-1' accessKey: 'AK.........' secretKey: 'asm.........'.
+```
+
+## Available models
+
+api availableModels
 
 ## Chat
 
