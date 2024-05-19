@@ -44,11 +44,12 @@ api availableModels
 
 ## Chat
 
+### Ask a question
+
 ```
 chat := CB.Chat newWithAPI: api.
 chat prompt: 'You are a cheerful assistant that happily answers all questions, no matter how silly they are'.
 chat ask: 'How much is the fish?'.
-chat complete.
 ```
 
 ### Chat with a specific model
