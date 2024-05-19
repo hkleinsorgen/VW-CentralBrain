@@ -6,15 +6,15 @@ Work in progress, still in its infancy.
 
 # Quickstart
 
-## Set the API + key
+## Create an API interface
 
-OpenAI
+### OpenAI
 
 ```
 api := CB.OpenAIInterface apiKey: 'sx-proj-.........'
 ```
 
-Google Vertex
+### Google Vertex
 
 ```
 api := CB.GoogleVertexAIInterface 
@@ -23,41 +23,54 @@ api := CB.GoogleVertexAIInterface
 	location: 'us-central1'.
 ```
 
-AWS Bedrock
+### AWS Bedrock
+
 ```
-api := AWSBedrockInterface region: 'us-east-1' accessKey: 'AK.........' secretKey: 'asm.........'.
+api := AWSBedrockInterface
+	region: 'us-east-1'
+	accessKey: 'AK.........'
+	secretKey: 'asm.........'.
 ```
+
+### Azure
+
+Not yet tested
 
 ## Available models
 
+```
 api availableModels
+```
 
 ## Chat
 
 ```
-| chat  |
 chat := CB.Chat newWithAPI: api.
 chat prompt: 'You are a cheerful assistant that happily answers all questions, no matter how silly they are'.
 chat ask: 'How much is the fish?'.
 chat complete.
 ```
 
-## Multimodal chat
+### Chat with a specific model
 
 ```
-| chat image |
+chat := Chat newWithModelContext: (api contextForModelNamed: 'anthropic.claude-v2').
+chat ask: 'How much is the fish?'.
+```
+
+### Multimodal chat
+
+```
 image := CB.Image filename: 'Lighthouse.jpg'.
-chat := CB.Chat modelContext: api defaultVisionContext.
+chat := CB.Chat newWithModelContext: api defaultVisionContext.
 chat prompt: 'You are an assistant that answers questions regarding images'.
 chat ask: 'Please describe what you see in this image' attachment: image.
 chat complete.
 ```
 
-
 ## Compute embeddings
 
 ```
-| document |
 document := CB.Document text: 'Smalltalk is a purely object oriented programming language (OOP) that was originally created in the 1970s for educational use, specifically for constructionist learning, but later found use in business.'.
 document embeddingsWithApi: api
 ```
