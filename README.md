@@ -24,10 +24,12 @@ api := CB.GoogleGeminiInterface apiKey: 'AIza.........'
 
 ```
 api := CB.GoogleVertexAIInterface 
-	apiKey: 'ya12.........'
+	accessToken: 'ya12.........'
 	project: 'myproject'
 	location: 'us-central1'.
 ```
+
+You can get a token with the gcloud tool by executing `gcloud auth print-access-token`. These tokens are short lived. The renewal mechanism is currently beyond the scope of this package.
 
 ### AWS Bedrock
 
@@ -68,11 +70,25 @@ chat ask: 'How much is the fish?'.
 ### Multimodal chat
 
 ```
-image := CB.Image filename: 'Lighthouse.jpg'.
+image := CB.Image url: 'https://smalltalk-80.org/image/poster-splash.jpg'.
 chat := CB.Chat newWithModelContext: api defaultVisionContext.
 chat prompt: 'You are an assistant that answers questions regarding images'.
 chat ask: 'Please describe what you see in this image' attachment: image.
-chat complete.
+```
+
+## Function calls
+
+```
+chat := Chat newWithDefaultContext.
+chat addTool: (CB.Tool 
+	named: 'get_price' 
+	description: 'Get the price for any item'
+	parameters: (Array with: (CB.ToolParameter named: 'item'))).
+chat addTool: (CB.Tool 
+	named: 'get_weight' 
+	description: 'Get the weight of items'
+	parameters: (Array with: (CB.ToolParameter named: 'item') with: (CB.ToolParameter named: 'amount'))).
+chat ask: 'What is the weight of three halibut?'.
 ```
 
 ## Compute embeddings
@@ -81,3 +97,13 @@ chat complete.
 document := CB.Document text: 'Smalltalk is a purely object oriented programming language (OOP) that was originally created in the 1970s for educational use, specifically for constructionist learning, but later found use in business.'.
 document embeddingsWithApi: api
 ```
+
+# Support matrix
+
+| Feature | OpenAI | Azure OpenAI | AWS Bedrock | Google  Gemini | Google Vertex | 
+| ------- | ------ | ------- | ------- | -------------- | ------------- |
+| Text chat | ✅ | Not tested |  ✅ | ✅  | ✅ |
+| Multimodal chat | ✅ | Not tested | ❌  | ✅  | ✅ |
+| Function calls | ✅ | Not tested | ❌  | ❌  | ❌ |
+| Create embeddings | ✅ | Not tested |  ✅ | ✅  | ✅ |
+| List models |  ✅ | Not tested |  ✅ | ✅  | ❌ |
