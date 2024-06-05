@@ -14,6 +14,12 @@ Work in progress, still in its infancy.
 api := CB.OpenAIInterface apiKey: 'sx-proj-.........'
 ```
 
+### Google Gemini
+
+```
+api := CB.GoogleGeminiInterface apiKey: 'AIza.........'
+```
+
 ### Google Vertex
 
 ```
@@ -26,7 +32,7 @@ api := CB.GoogleVertexAIInterface
 ### AWS Bedrock
 
 ```
-api := AWSBedrockInterface
+api := CB.AWSBedrockInterface
 	region: 'us-east-1'
 	accessKey: 'AK.........'
 	secretKey: 'asm.........'.
@@ -55,7 +61,7 @@ chat ask: 'How much is the fish?'.
 ### Chat with a specific model
 
 ```
-chat := Chat newWithModelContext: (api contextForModelNamed: 'anthropic.claude-v2').
+chat := CB.Chat newWithModelContext: (api contextForModelNamed: 'anthropic.claude-v2').
 chat ask: 'How much is the fish?'.
 ```
 
