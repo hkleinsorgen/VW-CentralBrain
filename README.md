@@ -20,6 +20,12 @@ api := CB.OpenAIInterface apiKey: 'sx-proj-.........'
 api := CB.GoogleGeminiInterface apiKey: 'AIza.........'
 ```
 
+Beta:
+
+```
+api := CB.GoogleGeminiBetaInterface apiKey: 'AIza.........'
+```
+
 ### Google Vertex
 
 ```
@@ -55,16 +61,24 @@ api availableModels
 ### Ask a question
 
 ```
+chat := Chat newWithDefaultContext.
+chat ask: 'What is the age of the universe?'.
+```
+### Give instructions
+
+```
 chat := CB.Chat newWithAPI: api.
-chat prompt: 'You are a cheerful assistant that happily answers all questions, no matter how silly they are'.
+chat instructions: 'You are a cheerful assistant that happily answers all questions, no matter how silly they are'.
 chat ask: 'How much is the fish?'.
 ```
+
+Note that instructions are not supported by all APIs / models.
 
 ### Chat with a specific model
 
 ```
 chat := CB.Chat newWithModelContext: (api contextForModelNamed: 'anthropic.claude-v2').
-chat ask: 'How much is the fish?'.
+chat ask: 'What is the meaning of life?'.
 ```
 
 ### Multimodal chat
@@ -72,7 +86,6 @@ chat ask: 'How much is the fish?'.
 ```
 image := CB.Image url: 'https://smalltalk-80.org/image/poster-splash.jpg'.
 chat := CB.Chat newWithModelContext: api defaultVisionContext.
-chat prompt: 'You are an assistant that answers questions regarding images'.
 chat ask: 'Please describe what you see in this image' attachment: image.
 ```
 
@@ -103,6 +116,7 @@ document embeddingsWithApi: api
 | Feature | OpenAI | Azure OpenAI | AWS Bedrock | Google  Gemini | Google Vertex | 
 | ------- | ------ | ------- | ------- | -------------- | ------------- |
 | Text chat | ✅ | Not tested |  ✅ | ✅  | ✅ |
+| Chat instructions | ✅ | Not tested |  ✅ (Titan only) | ✅ (Beta only)  | ❌ | 
 | Multimodal chat | ✅ | Not tested | ❌  | ✅  | ✅ |
 | Function calls | ✅ | Not tested | ❌  | ❌  | ❌ |
 | Create embeddings | ✅ | Not tested |  ✅ | ✅  | ✅ |
