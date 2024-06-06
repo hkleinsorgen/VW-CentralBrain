@@ -61,7 +61,7 @@ api availableModels
 ### Ask a question
 
 ```
-chat := Chat newWithDefaultContext.
+chat := Chat newWithAPI: api.
 chat ask: 'What is the age of the universe?'.
 ```
 ### Give instructions
