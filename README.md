@@ -92,7 +92,7 @@ chat ask: 'Please describe what you see in this image' attachment: image.
 ## Function calls
 
 ```
-chat := Chat newWithDefaultContext.
+chat := Chat newWithAPI: api.
 chat addTool: (CB.Tool 
 	named: 'get_price' 
 	description: 'Get the price for any item'
