@@ -131,9 +131,9 @@ document embeddingsWithApi: api
 
 | Feature | OpenAI | Azure OpenAI | AWS Bedrock | Google  Gemini | Google Vertex | 
 | ------- | ------ | ------- | ------- | -------------- | ------------- |
-| Text chat | ✅ | Not tested |  ✅ | ✅  | ✅ |
-| Chat instructions | ✅ | Not tested |  ✅ (Titan only) | ✅ (Beta only)  | ❌ | 
-| Multimodal chat | ✅ | Not tested | ❌  | ✅  | ✅ |
-| Function calls | ✅ | Not tested | ❌  | ✅ (Agents)  | ❌ |
-| Create embeddings | ✅ | Not tested |  ✅ | ✅  | ✅ |
-| List models |  ✅ | Not tested |  ✅ | ✅  | ❌ |
+| Text chat | ✅ | Not tested | ✅ | ✅ | ✅ |
+| Chat instructions | ✅ | Not tested | ✅ (Titan only) | ✅ (Beta only) | ❌ | 
+| Multimodal chat | ✅ | Not tested | ❌ | ✅ | ✅ |
+| Function calls | ✅ | Not tested | ✅ (Agents) | ❌ | ❌ |
+| Create embeddings | ✅ | Not tested |  ✅ | ✅ | ✅ |
+| List models | ✅ | Not tested | ✅ | ✅ | ❌ |
