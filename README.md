@@ -91,6 +91,10 @@ chat ask: 'Please describe what you see in this image' attachment: image.
 
 ## Function calls
 
+### OpenAI
+
+OpenAI allows to specify functions as a part of the message
+
 ```
 chat := Chat newWithAPI: api.
 chat addTool: (CB.Tool 
@@ -102,6 +106,18 @@ chat addTool: (CB.Tool
 	description: 'Get the weight of items'
 	parameters: (Array with: (CB.ToolParameter named: 'item') with: (CB.ToolParameter named: 'amount'))).
 chat ask: 'What is the weight of three halibut?'.
+```
+
+### Bedrock
+
+Functions must be predefined in an action group as a part of an agent. 
+
+```
+alias := CB.BedrockAgentAlias agentId: '4PH....' aliasId: 'LU0.....'.
+context := api contextForAgentAlias: alias.
+agent := Agent newWithAgentContext: context.
+" Assume that we have defined an action group function named get_age_of_person(person) "
+agent runTask: 'How old is Harry?'.
 ```
 
 ## Compute embeddings
@@ -118,6 +134,6 @@ document embeddingsWithApi: api
 | Text chat | ✅ | Not tested |  ✅ | ✅  | ✅ |
 | Chat instructions | ✅ | Not tested |  ✅ (Titan only) | ✅ (Beta only)  | ❌ | 
 | Multimodal chat | ✅ | Not tested | ❌  | ✅  | ✅ |
-| Function calls | ✅ | Not tested | ❌  | ❌  | ❌ |
+| Function calls | ✅ | Not tested | ❌  | ✅ (Agents)  | ❌ |
 | Create embeddings | ✅ | Not tested |  ✅ | ✅  | ✅ |
 | List models |  ✅ | Not tested |  ✅ | ✅  | ❌ |
